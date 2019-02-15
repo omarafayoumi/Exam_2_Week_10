@@ -3,8 +3,8 @@
 # successful
 def main():
     # when you have initialized your object, use the calls below to test
-    #run_test_init()
-    #run_test_withdraw()
+    run_test_init()
+    run_test_withdraw()
     return
 
 
@@ -47,9 +47,14 @@ class Bank(object):
           :type account_number: str
         """
     # ---------------------------------------------------------------------
-    # TODO: 1. Implement and test instances of this class.
+    # DONE: 1. Implement and test instances of this class.
     #     See the testing code (scroll down near bottom) for more examples.
     # ---------------------------------------------------------------------
+        self.name = name
+        self.initial_deposit = initial_deposit
+        self.account_number = account_number
+        self.balance = initial_deposit
+
 
 
     def withdraw(self, amount):
@@ -76,7 +81,7 @@ class Bank(object):
           #   an error message is printed because there are insufficient funds
         """
     # ---------------------------------------------------------------------
-    # TODO: 4. Implement and test the withdraw method
+    # DONE: 4. Implement and test the withdraw method
     #     Implement your own test code, before you write your method
     #     Insert your test code for withdraw, where indicated
     #     Scroll down near the bottom of this screen
@@ -84,6 +89,11 @@ class Bank(object):
     #   Put your code for withdraw below
     #
     # ---------------------------------------------------------------------
+        if amount < self.balance:
+            self.balance = self.balance - amount
+            return self.balance
+        v = 'Funds not available. Current balance is: ' +  str(self.balance)
+        return v
 
 
 def run_test_init():
@@ -106,15 +116,68 @@ def run_test_init():
         print_failure_message()
     print()
     # ---------------------------------------------------------------------
-    # TODO: 2. Add two more test cases for your Bank class below.
+    # DONE: 2. Add two more test cases for your Bank class below.
     # ---------------------------------------------------------------------
+    b2 = Bank('Jana', 12345, 'J1')
+    expected_name = 'Jana'
+    expected_balance = 12345
+    expected_account_number = 'J1'
+    print("Expected:", expected_name, expected_balance, expected_account_number)
+    print("Actual:  ", b2.name, b2.balance, b2.account_number)
+    if (expected_name == b2.name) and (expected_balance == b2.balance) and (
+            expected_account_number == b2.account_number):
+        print("Test passed SUCCESSFULLY!")
+    else:
+        print_failure_message()
+    print()
+    b3 = Bank('Nadia', 5, 'N12')
+    expected_name = 'Nadia'
+    expected_balance = 5
+    expected_account_number = 'N12'
+    print("Expected:", expected_name, expected_balance, expected_account_number)
+    print("Actual:  ", b3.name, b3.balance, b3.account_number)
+    if (expected_name == b3.name) and (expected_balance == b3.balance) and (
+            expected_account_number == b3.account_number):
+        print("Test passed SUCCESSFULLY!")
+    else:
+        print_failure_message()
+    print()
 
 # ---------------------------------------------------------------------
-# TODO: 3. Implement your test for the withdraw method below
+# DONE: 3. Implement your test for the withdraw method below
 # ---------------------------------------------------------------------
 def run_test_withdraw():
 # Implement at least two tests.  Use copy and paste to speed your coding.
-    pass
+    print()
+    print('-----------------------------------------------------------')
+    print('Testing the   withdraw   method of the Bank class.')
+    print('-----------------------------------------------------------')
+    b4 = Bank('Omar',0,'O545')
+    expected = 'Funds not available. Current balance is: 0'
+    actual = b4.withdraw(10)
+    print('expected:', expected)
+    print('actual:', actual)
+    if expected == actual:
+        print('SUCCESS!')
+    else:
+        print_failure_message()
+
+
+    b4 = Bank('Noor', 10000, 'N444')
+    expected1 = 9990
+    actual1 = b4.withdraw(10)
+    print('expected1:',expected1)
+    print('actual1:',actual1)
+    if expected1 == actual1:
+        print('SUCCESS!')
+    else:
+        print_failure_message()
+
+
+
+
+
+
 
 
 def print_failure_message():

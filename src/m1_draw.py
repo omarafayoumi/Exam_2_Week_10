@@ -128,8 +128,22 @@ def is_prime(n):
 #
 #
 def draw_a_picture(point, n, color, window):
+    circle = rg.Circle(point,100)
+    circle.attach_to(window)
+    window.render(.5)
+    rec = rg.Rectangle(rg.Point(point.x-80,point.y+40), rg.Point(point.x+80,point.y - 40))
+    rec.attach_to(window)
+    for k in range(n):
+        line = rg.Line(point,rg.Point(rec.get_upper_left_corner().x+ (k)*(160/(n-1)),rec.get_upper_left_corner().y))
+        if is_prime(k+1):
+            line.color = 'orange'
+        else:
+            line.color = color
+        line.attach_to(window)
+    window.render()
 
-    pass
+
+
 
 
 main()
